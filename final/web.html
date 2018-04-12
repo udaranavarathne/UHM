@@ -1,4 +1,37 @@
 <!DOCTYPE html>
+<?php
+
+if(isset($_POST['click'])){  
+
+    $name   =   $_POST['name'];
+    $email  =   $_POST['email'];
+    $msg=   $_POST['msg'];
+    
+    $to         = "mohananura1@gmail.com";
+    $subject    = "New Message from Visit Sri Lanka Tours and Travels";
+    
+    $message    = "<h3>Message from - ". $name ."</h3>";
+    $message    .= $msg;
+    
+    $header     = "From:". $email ." \r\n";
+    $header     .= "Cc:udara128@gmail.com \r\n";
+    $header     .= "MIME-Version: 1.0\r\n";
+    $header     .= "Content-type: text/html\r\n";
+    
+    $retval = mail ($to,$subject,$message,$header);
+    
+    if( $retval == true )
+    {
+        $s_msg = "Your email has been sent. We will contact you as soon as possible";
+    }
+    else
+    {
+        $e_msg = "There has been an error. Please try again";
+    }
+
+}
+?>
+
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
@@ -83,7 +116,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
   <div class="w3-container w3-margin-top" id="packages">
     
-    <p>Make yourself at home is our slogan. We offer the best beds in the industry. Sleep well and rest well.</p>
+    <p>While we offer pre planned tour packages, we take pride in designing tour packages according to your intersts. Just let us know precisely what you'd like to do, see, and where you'd like to go. We will design a tour in Sri Lanka just for you!</p>
     <br>
   </div>
   
@@ -177,7 +210,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <br>
 
       <h3>About</h3>
-      <h6>Our hotel is one of a kind. It is truely amazing. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</h6>
+      <h6>Create your own holiday with qualified and experienced Tour Operators in Sri Lanka. We will help you to plan your stay in Sri Lanka, take care of your travel arrangements in Sri Lanka and we will make sure that your visit to this island is a memorable one. </h6>
     <p>We accept: <i class="fa fa-credit-card w3-large"></i> <i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal w3-large"></i></p>
     </div>
     <div class="w3-col l8 m5">
@@ -204,21 +237,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
               <img class="img-fluid rounded-circle mb-3" src="image/comments/testimonials-1.jpg" alt="">
               <h5>Margaret E.</h5>
-              <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+              <p class="font-weight-light mb-0">"My stay here in sri lanka was fantastic. Thank you guys"</p>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
               <img class="img-fluid rounded-circle mb-3" src="image/comments/testimonials-2.jpg" alt="">
               <h5>Fred S.</h5>
-              <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing ."</p>
+              <p class="font-weight-light mb-0">"Amazing trip. Very good service."</p>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
               <img class="img-fluid rounded-circle mb-3" src="image/comments/testimonials-3.jpg" alt="">
               <h5>Sarah W.</h5>
-              <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+              <p class="font-weight-light mb-0">"Thanks so much for taking care of us and for helping us all the time. well organized tour"</p>
             </div>
           </div>
 
@@ -275,11 +308,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <i class="fa fa-map-marker w3-text-red" style="width:30px"></i> Chicago, US<br>
     <i class="fa fa-phone w3-text-red" style="width:30px"></i>  +00 151515<br>
     <i class="fa fa-envelope w3-text-red" style="width:30px"> </i>  mail@mail.com<br><br>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required name="Email"></p>
-      <p><textarea class="w3-input w3-padding-16 w3-border"  placeholder="Message" required name="Message"></textarea> </p>
-      <p><button class="w3-button w3-black w3-padding-large" type="submit">SEND MESSAGE</button></p>
+    <form action="./web.php" method="post">
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="name"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required name="email"></p>
+      <p><textarea class="w3-input w3-padding-16 w3-border"  placeholder="Message" required name="msg"></textarea> </p>
+      <p><button class="w3-button w3-black w3-padding-large" type="submit" name="click">SEND MESSAGE</button></p>
+	<p><?php if(isset($e_msg)){echo $e_msg;} else{echo $s_msg;}?></p>
     </form>
   </div>
 
